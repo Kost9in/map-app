@@ -1,0 +1,83 @@
+<div class="left-sidebar" ng-class="{open: $ctrl.open}">
+  <a ng-click="$ctrl.toggleOpen()" class="open">
+    <span>
+      <i class="fa fa-angle-right"></i>
+    </span>
+  </a>
+  <div class="overflow-wrapper">
+
+    <div class="tab start-tab" ng-class="{show: $ctrl.tab==0}">
+      <p>Для поиска маршрута Вам необходимо выбрать точки старта и финиша.</p>
+      <button ng-click="$ctrl.toStep(1)">Проложить маршрут</button>
+    </div>
+
+    <div class="tab select-tab" ng-class="{show: $ctrl.tab==1}">
+      <p>Выберите точку старта из списка или укажите на карте:</p>
+      <select ng-model="$ctrl.from" ng-change="$ctrl.changeSelect('from')">
+        <option disabled value="">Выберите пункт A</option>
+        <option ng-repeat="marker in $ctrl.markers" value="{{marker.point.id}}">{{marker.point.title}}</option>
+      </select>
+      <button ng-disabled="!$ctrl.from" ng-click="$ctrl.toStep(2)">Продолжить</button>
+      <button ng-click="$ctrl.toStep(0)">Назад</button>
+    </div>
+
+    <div class="tab select-tab" ng-class="{show: $ctrl.tab==2}">
+      <div class="selected-point last">
+        <p><span ng-style="{background: $ctrl.getPoint('from').color}">A</span> {{$ctrl.getPoint('from').title}}</p>
+      </div>
+      <p>Выберите точку финиша из списка или укажите на карте:</p>
+      <select ng-model="$ctrl.to" ng-change="$ctrl.changeSelect('to')">
+        <option disabled value="">Выберите пункт B</option>
+        <option ng-repeat="marker in $ctrl.markers" value="{{marker.point.id}}" ng-disabled="marker.point.id==$ctrl.from">{{marker.point.title}}</option>
+      </select>
+      <button ng-disabled="!$ctrl.to" ng-click="$ctrl.toStep(3)">Продолжить</button>
+      <button ng-click="$ctrl.toStep(1)">Назад</button>
+    </div>
+
+    <div class="tab select-tab" ng-class="{show: $ctrl.tab==3}">
+      <div class="selected-point">
+        <p><span ng-style="{background: $ctrl.getPoint('from').color}">A</span> {{$ctrl.getPoint('from').title}}</p>
+      </div>
+      <div class="selected-point last">
+        <p><span ng-style="{background: $ctrl.getPoint('to').color}">B</span> {{$ctrl.getPoint('to').title}}</p>
+      </div>
+      <p ng-show="!$ctrl.pathList.length">Информация по Вашему маршруту загружается...</p>
+      <p ng-show="$ctrl.pathList.length">По Вашему запросу<br>найдено маршрутов: {{$ctrl.pathList.length}}</p>
+      <ul class="path-list" ng-show="$ctrl.pathList.length">
+        <li ng-repeat="path in $ctrl.pathList">
+          <a ng-click="$ctrl.showPath($index)">
+            <span class="title">Маршрут {{$index + 1}}</span>
+            <span class="distance">Расстояние: {{path.distance}} км</span>
+            <span class="goto">Кол-во пересадок: {{path.goto}}</span>
+          </a>
+        </li>
+      </ul>
+      <button ng-click="$ctrl.toStep(0)">Проложить новый маршрут</button>
+    </div>
+
+    <div class="tab select-tab" ng-class="{show: $ctrl.tab==4}">
+      <div class="selected-point">
+        <p><span ng-style="{background: $ctrl.getPoint('from').color}">A</span> {{$ctrl.getPoint('from').title}}</p>
+      </div>
+      <div class="selected-point last">
+        <p><span ng-style="{background: $ctrl.getPoint('to').color}">B</span> {{$ctrl.getPoint('to').title}}</p>
+      </div>
+      <div class="info">
+        <p class="title">Маршрут {{$ctrl.activePath + 1}}</p>
+        <p class="distance">Расстояние: {{$ctrl.pathList[$ctrl.activePath].distance}} км</p>
+        <p class="goto">Кол-во пересадок: {{$ctrl.pathList[$ctrl.activePath].goto}}</p>
+      </div>
+      <ul class="points-list">
+        <li ng-repeat="point in $ctrl.pathList[$ctrl.activePath].stack">
+          <a ng-click="$ctrl.showPointInPath(point.id)" ng-class="{active: $ctrl.activePointToPath==point.id}">
+            <i ng-style="{background: point.color}"></i>
+            <span>{{point.title}}</span>
+          </a>
+        </li>
+      </ul>
+      <button ng-click="$ctrl.backToPathList()">К списку маршрутов</button>
+      <button ng-click="$ctrl.toStep(0)">Проложить новый маршрут</button>
+    </div>
+
+  </div>
+</div>

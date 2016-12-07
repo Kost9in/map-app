@@ -1,0 +1,16 @@
+<map-bg></map-bg>
+
+<div class="marker-info" ng-class="{show: $ctrl.activeMarkerInfo.title || $ctrl.activeMarkerInfo.description}">
+  <h1>{{$ctrl.activeMarkerInfo.title}}</h1>
+  <p>{{$ctrl.activeMarkerInfo.description}}</p>
+</div>
+
+<left-sidebar loader="$ctrl.loader"></left-sidebar>
+
+<div class="loader" ng-class="{show: $ctrl.loader}">
+  <div class="bg"></div>
+  <div class="spinner"></div>
+</div>
+
+<div class="error" ng-class="{show: $ctrl.error}">{{$ctrl.error}}</div>
+

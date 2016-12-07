@@ -1,0 +1,101 @@
+
+/* responsive */
+
+@media (max-width: 767px) {
+
+  .error {
+    width: 90%;
+    padding: 30px 20px;
+    font-size: 14px;
+  }
+
+  .marker-info {
+    width: 80%;
+    padding: 5px 10px;
+    h1 {
+      margin: 0 0 5px;
+      font-size: 16px;
+    }
+    p {
+      font-size: 13px;
+    }
+  }
+
+  .left-sidebar {
+    left: -280px;
+    width: 280px;
+    padding: 10px;
+    .overflow-wrapper {
+      padding: 10px;
+      .tab {
+        p {
+          margin: 0 0 15px;
+          font-size: 14px;
+        }
+        button {
+          width: 90%;
+          padding: 7px 0;
+          margin: 0 auto 15px;
+          font-size: 14px;
+        }
+        select {
+          width: 90%;
+          height: 30px;
+          margin: 0 auto 15px;
+          font-size: 14px;
+        }
+        &.start-tab p {
+          padding-top: 15px;
+        }
+        .selected-point {
+          padding: 7px;
+          &.last {
+            margin-bottom: 15px;
+          }
+          p {
+            font-size: 14px;
+            span {
+              width: 20px;
+              height: 20px;
+              font-size: 12px;
+            }
+          }
+        }
+        .path-list {
+          margin: 0 0 15px;
+          li {
+            a {
+              padding: 5px;
+              margin: 0 0 7px;
+              span {
+                &.title {
+                  font-size: 14px;
+                  margin-bottom: 3px;
+                }
+                &.distance, &.goto {
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+        .info {
+          margin: 0 0 15px;
+          p {
+            &.title {
+              font-size: 14px;
+              margin-bottom: 3px;
+            }
+            &.distance, &.goto {
+              font-size: 12px;
+            }
+          }
+        }
+        .points-list {
+          margin: 0 0 15px;
+        }
+      }
+    }
+  }
+
+}
